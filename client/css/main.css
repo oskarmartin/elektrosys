@@ -8,6 +8,125 @@
     src: url('../fonts/Akrobat-Bold.otf');
 }
 
+
+/* Slider tests */
+.picture-left{
+    font-size: 32px !important;
+    position: absolute;
+    z-index: 9999;
+    color: white;
+    opacity: 0.55;
+    border: none;
+    margin-top: 120px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.picture-right{
+   font-size: 32px !important;
+   position: absolute;
+   z-index: 9999;
+   color: white;
+   opacity: 0.55;
+   border: none;
+   cursor: pointer;
+   right: 10px;
+   top: 120px;
+
+}
+.image-container{
+    position: absolute;
+    height: 300px;
+    width: 400px;
+    z-index: 999999;
+    overflow: hidden;
+    margin-left: 80px;
+    margin-top: 80px;
+}
+
+.card-container{
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+}
+.card{
+    height: 300px;
+    width: 400px;
+    position: absolute;
+    object-fit: cover;
+
+}
+.card.ng-animate{
+    -webkit-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-moz-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-ms-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-o-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+}
+.card.ng-enter.toLeft {
+  left: 100%;
+}
+.card.ng-enter-active.toLeft {
+  left: 0;
+}
+.card.ng-leave.toLeft {
+  left: 0;
+}
+.card.ng-leave-active.toLeft {
+  left: -100%;
+}
+
+.card.ng-enter.toRight {
+  left: -100%;
+}
+
+.card.ng-enter-active.toRight {
+  left: 0;
+}
+
+.card.ng-leave.toRight {
+  left: 0;
+}
+
+.card.ng-leave-active.toRight {
+  left: 100%;
+}
+/*.animate-a.card.ng-enter.toLeft {
+  left: 100%;
+}
+.card.ng-enter-active.toLeft {
+  left: 0;
+}
+.card.ng-leave.toLeft {
+  left: 0;
+}
+.card.ng-leave-active.toLeft {
+  left: -100%;
+}
+
+.card.ng-enter.toRight {
+  left: -100%;
+}
+
+.card.ng-enter-active.toRight {
+  left: 0;
+}
+
+.card.ng-leave.toRight {
+  left: 0;
+}
+
+.card.ng-leave-active.toRight {
+  left: 100%;
+}dd,
+.animate-remove{
+    -webkit-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-moz-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-ms-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	-o-transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+	transition:1000ms cubic-bezier(.165,.84,.44,1) all;
+}*/
+
+
 body {
     font-family: Akr-Regular;
 }
@@ -410,7 +529,6 @@ i {
 .request-project {
     position: relative;
     top: -7px;
-    left: 0;
     background-color: #f9d616;
     border: none;
     color: white;
@@ -729,7 +847,7 @@ i {
 .project-pictures button {
     font-size: 29px;
     margin-bottom: 115%;
-    padding: 5px 3px;
+    padding: 5px 12px;
     opacity: 1;
     margin-left: 70px;
 }

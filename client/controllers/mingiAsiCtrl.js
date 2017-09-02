@@ -32,6 +32,7 @@ mingiAsiCtrl.config(function ($translateProvider) {
 
         PROJECTSINSPECT: 'Vaata lähemalt',
         PROJECTSMORE: 'Järgmine',
+        PROJECTSLESS: 'Eelmine',
 
         MAPEXTRA:'Avage google mapsis',
         CONTACTHEAD1: 'Soovite infot?',
@@ -78,6 +79,7 @@ mingiAsiCtrl.config(function ($translateProvider) {
 
             PROJECTSINSPECT: 'More info',
             PROJECTSMORE: 'Next',
+            PROJECTSLESS: 'Previous',
 
             MAPEXTRA:'Open in google maps',
             CONTACTHEAD1: 'Want more information?',

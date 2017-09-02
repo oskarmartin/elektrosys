@@ -134,7 +134,13 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 });
 
-myApp.run(function ($rootScope, $location, $state, AuthService) {
+myApp.run(function ($rootScope, $location, $state, AuthService, $window) {
+
+    $window.ga('create', 'UA-105086894-1', 'auto');
+    $rootScope.$on('$stateChangeSuccess', function(event){
+        $window.ga('send', 'pageview', $location.path());
+    })
+
     $rootScope.sidemenu = false;
     $rootScope.sidemenuOverlay = false;
     $rootScope.items = [];
@@ -153,6 +159,3 @@ myApp.run(function ($rootScope, $location, $state, AuthService) {
 myApp.run(['$anchorScroll', function ($anchorScroll) {
     $anchorScroll.yOffset = 0;   // always scroll by 50 extra pixels
 }])
-
-
-

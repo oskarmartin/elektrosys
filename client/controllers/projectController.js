@@ -1,5 +1,5 @@
 var projectController = angular.module('projectController', ['ui.bootstrap']);
-projectController.controller('projectController', function projectController($scope, $rootScope) {
+projectController.controller('projectController', function projectController($scope, $rootScope, $timeout) {
 
 
     $scope.projects = [
@@ -254,10 +254,12 @@ projectController.controller('projectController', function projectController($sc
 
 
     $rootScope.$watch('language', function () {
+
         $scope.projectNameList = [];
         $scope.projectSubList = [];
         $scope.projectYearList = [];
         $scope.projectShortList = [];
+
         if ($rootScope.language == "et") {
             for (i = 0; i < $scope.project.length; i++) {
                 $scope.projectNameList.push($scope.project[i].ee.name);
@@ -296,6 +298,7 @@ projectController.controller('projectController', function projectController($sc
         $rootScope.projectViewOverlay = true;
         $scope.globalPictures = $scope.projects[index].pictures;
         $scope.globalAasta = $scope.projects[index].aasta;
+        $rootScope.index = index;
 
         $scope.$watch('$rootScope.language', function () {
             if ($rootScope.language == "et") {
@@ -328,9 +331,80 @@ projectController.controller('projectController', function projectController($sc
         index = 0;
     };
 
-    $scope.menuDown = function () {
+    $scope.displayCard = 1;
 
+    $scope.prev = function(){
+        $scope.toRight = false;
+        $scope.toLeft = true;
+
+        $timeout(function(){
+            if($scope.displayCard == 0 ){
+                $scope.displayCard = 4;
+            }else{
+                $scope.displayCard -= 1;
+            }
+        }, 0);
+    }
+
+    $scope.next = function(){
+
+        $scope.toLeft = false;
+        $scope.toRight = true;
+
+        $timeout(function(){
+            if($scope.displayCard == 4){
+                $scope.displayCard = 0;
+            } else{
+                $scope.displayCard += 1;
+            }
+        }, 0);
+    }
+    $scope.menuUp = function(){
+        $scope.index--;
+        if($scope.index === 0){
+            $scope.index = 7;
+        }
+        if($rootScope.language === 'et'){
+            $rootScope.holder = $scope.project[$scope.index].ee;
+        }
+        if($rootScope.language === 'en'){
+            $rootScope.holder = $scope.project[$scope.index].en;
+        }
+        if($rootScope.language === 'ru'){
+            $rootScope.holder = $scope.project[$scope.index].ru;
+        }
+        $scope.globalName = $rootScope.holder.name;
+        $scope.globalAlapealkiri = $rootScope.holder.alapealkiri;
+        $scope.globalAasta = $rootScope.holder.aasta;
+        $scope.globalTekst = $rootScope.holder.tekst;
+        $scope.globalPictures = $rootScope.holder.pictures;
+    }
+    $scope.menuDown = function () {
+        console.log($scope.index);
+        $scope.index++;
+        if($scope.index === 7){
+            $scope.index = 0;
+        }
+        if($rootScope.language === 'et'){
+            $rootScope.holder = $scope.project[$scope.index].ee;
+        }
+        if($rootScope.language === 'en'){
+            $rootScope.holder = $scope.project[$scope.index].en;
+        }
+        if($rootScope.language === 'ru'){
+            $rootScope.holder = $scope.project[$scope.index].ru;
+        }
+        /*if($rootScope.language === 'et'){
+            $rootScope.holder = $scope.project[$rootScope.index].ee;
+        }
+        else if($rootScope.language === 'en'){
+            $rootScope.holder = $scope.project[$rootScope.index].en;
+        }
+        else{
+            $rootScope.holder = $scope.project[$rootScope.index].ru;
+        }
         $scope.$watch('$rootScope.language', function () {
+            console.log($rootScope.holder);
             if ($rootScope.language == "et") {
                 $rootScope.holder = $scope.project[index >= $scope.project.length - 1 ? index = 0 : ++index].ee;
             }
@@ -340,7 +414,7 @@ projectController.controller('projectController', function projectController($sc
             else {
                 $rootScope.holder = $scope.project[index >= $scope.projects.length - 1 ? index = 0 : ++index].ru
             }
-        });
+        });*/
         $rootScope.projectview = true;
         $scope.globalName = $rootScope.holder.name;
         $scope.globalAlapealkiri = $rootScope.holder.alapealkiri;
@@ -355,4 +429,3 @@ projectController.controller('projectController', function projectController($sc
         $scope.myHTML =
             'checked '
 });
-
