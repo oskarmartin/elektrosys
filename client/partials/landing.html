@@ -210,20 +210,7 @@
     </div>
     <div scroll-bookmark="references" class="references">
         <div ng-controller="projectController">
-            <button ng-click="prev()">Previous</button>
-            <button ng-click="next()">Previous</button>
-            <div>
-                Current index: {{cardIndex}}
-            </div>
-            <div class="card-container" ng-switch="displayCard">
-                <div ng-switch-when="1" class="card" id="image1" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-                    first one
-                </div>
-                <div ng-switch-when="2" class="card" id="image2" ng-class="{'toLeft': toLeft, 'toRight': toRight}">
-                    second one
-                </div>
-            </div>
-
+        
             <div class="gallery cf">
                 <div class="image-holder" ng-repeat="project in projects">
                     <img ng-src="{{project.image}}"/>
