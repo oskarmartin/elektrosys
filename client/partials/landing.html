@@ -25,7 +25,7 @@
                     <div class="navbar-header">
 
                         <a ng-if="$root.language === 'et'" class="navbar-brand" scroll-to-bookmark="home"><img id="logo" ng-src="img/est-logo.svg"/></a>
-                        <a ng-if="$root.language !== 'et'" class="navbar-brand" scroll-to-bookmark="home"><img id="logo" ng-ng-src="img/logo.svg"/></a>
+                        <a ng-if="$root.language !== 'et'" class="navbar-brand" scroll-to-bookmark="home"><img id="logo" ng-src="img/logo.svg"/></a>
                     </div>
                     <div ng-click="toggleSideMenu()" class="three col" id="burger">
                         <div class="hamburger" id="hamburger-8">
@@ -210,7 +210,7 @@
     </div>
     <div scroll-bookmark="references" class="references">
         <div ng-controller="projectController">
-        
+
             <div class="gallery cf">
                 <div class="image-holder" ng-repeat="project in projects">
                     <img ng-src="{{project.image}}"/>
@@ -226,9 +226,9 @@
                 <!--<button ng-click="prev()">Previous</button>
                 <button ng-click="next()">Next</button>-->
                 <div class="image-container">
-                    <span><i ng-click="next()" class="fa fa-caret-left picture-left" aria-hidden="true"></i></span>
-                    <span><i ng-click="prev()" class="fa fa-caret-right picture-right" aria-hidden="true"></i></span>
-                    <div ng-repeat="item in globalPictures track by $index">
+                    <span ng-hide="prevButtonHidden"><i ng-click="prev()" class="fa fa-caret-left picture-left" aria-hidden="true"></i></span>
+                    <span ng-hide="nextButtonHidden"><i ng-click="next()" class="fa fa-caret-right picture-right" aria-hidden="true"></i></span>
+                    <div ng-repeat="item in globalPictures">
                         <img ng-class="{'toLeft': toLeft, 'toRight': toRight}" class="card" ng-src="{{item}}" ng-if="$index == displayCard"/>
                     </div>
                 </div>
@@ -327,13 +327,14 @@
                     <h2>{{ 'CONTACTHEAD2' | translate }}</h2>
                 </div>
 
-                <div class="col-md-4 contact-form">
-                    <form>
-                        <input type="text" name="name" placeholder="{{ 'FORMNAME' | translate }}"/>
-                        <input type="email" name="e-mail" placeholder="{{ 'FORMEMAIL' | translate }}"/>
-                        <textarea class="col-xs-12" name="text" id="text" rows="3"
-                                  placeholder="{{ 'FORMMESSAGE' | translate }}"></textarea>
-                        <button class="btn-send col-xs-12">{{ 'LANDINGBUTTON1' | translate }}</button>
+                <div class="col-md-4 contact-form" ng-controller="mailCtrl">
+                    <form class="email-form" name="emailForm" ng-submit="submitForm(emailForm.$valid)" novalidate>
+                        <span class="email-error" ng-show="errorMsg">{{'EMAILERROR' | translate }}</span>
+                        <input ng-model="name" type="text" name="name" placeholder="{{ 'FORMNAME' | translate }}" required/>
+                        <input ng-model="email" type="email" name="email" placeholder="{{ 'FORMEMAIL' | translate }}" required/>
+                        <textarea ng-model="text" class="col-xs-12" name="text" id="text" rows="3"
+                                  placeholder="{{ 'FORMMESSAGE' | translate }}" required></textarea>
+                        <button type="submit" class="btn-send col-xs-12">{{ 'LANDINGBUTTON1' | translate }}</button>
                     </form>
                 </div>
             </div>
@@ -497,13 +498,13 @@
                     </div>
 
 
-                    <div class="col-xs-12 contact-formM">
+                    <div class="col-xs-12 contact-formM" ng-controller="mailCtrl">
                         <form>
-                            <input type="text" name="name" placeholder="{{ 'FORMNAME' | translate }}"/>
-                            <input type="email" name="e-mail" placeholder="{{ 'FORMEMAIL' | translate }}"/>
-                            <textarea name="text" id="" rows="3"
+                            <input ng-model="email.name" type="text" placeholder="{{ 'FORMNAME' | translate }}"/>
+                            <input ng-model="email.email" type="email" placeholder="{{ 'FORMEMAIL' | translate }}"/>
+                            <textarea ng-model="email.text" name="text" id="" rows="3"
                                       placeholder="{{ 'FORMMESSAGE' | translate }}"></textarea>
-                            <button class="btn-send">{{ 'LANDINGBUTTON1' | translate }}</button>
+                            <input type="submit" class="btn-send" >{{ 'LANDINGBUTTON1' | translate }}</button>
                         </form>
                     </div>
                 </div>

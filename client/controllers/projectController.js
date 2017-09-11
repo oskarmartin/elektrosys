@@ -1,6 +1,8 @@
 var projectController = angular.module('projectController', ['ui.bootstrap']);
 projectController.controller('projectController', function projectController($scope, $rootScope, $timeout) {
 
+    $scope.nextButtonHidden = false;
+    $scope.prevButtonHidden = true;
 
     $scope.projects = [
         {
@@ -300,6 +302,7 @@ projectController.controller('projectController', function projectController($sc
         $scope.globalAasta = $scope.projects[index].aasta;
         $rootScope.index = index;
 
+
         $scope.$watch('$rootScope.language', function () {
             if ($rootScope.language == "et") {
                 $scope.globalName = $scope.project[index].ee.name;
@@ -329,40 +332,44 @@ projectController.controller('projectController', function projectController($sc
         $rootScope.projectview = false;
         $rootScope.projectViewOverlay = false;
         index = 0;
+        $scope.displayCard = 0;
+        $scope.nextButtonHidden = false;
+        $scope.prevButtonHidden = true;
     };
 
-    $scope.displayCard = 1;
+    $scope.displayCard = 0;
 
     $scope.prev = function(){
-        $scope.toRight = false;
-        $scope.toLeft = true;
+        $scope.toRight = true;
+        $scope.toLeft = false;
+        $scope.nextButtonHidden = false;
 
         $timeout(function(){
-            if($scope.displayCard == 0 ){
-                $scope.displayCard = 4;
-            }else{
-                $scope.displayCard -= 1;
+            $scope.displayCard -= 1;
+            if($scope.displayCard == 0){
+                $scope.prevButtonHidden = true;
             }
         }, 0);
     }
 
     $scope.next = function(){
-
-        $scope.toLeft = false;
-        $scope.toRight = true;
-
+        var length = $scope.project[$scope.index].ee.pictures.length;
+        $scope.toLeft = true;
+        $scope.toRight = false;
+        $scope.prevButtonHidden = false;
         $timeout(function(){
-            if($scope.displayCard == 4){
-                $scope.displayCard = 0;
-            } else{
-                $scope.displayCard += 1;
+            $scope.displayCard += 1;
+            if($scope.displayCard == length - 1){
+                $scope.nextButtonHidden = true;
             }
         }, 0);
     }
+
     $scope.menuUp = function(){
         $scope.index--;
+        var length = $scope.project[$scope.index].ee.pictures.length;
         if($scope.index === 0){
-            $scope.index = 7;
+            $scope.index = length-1;
         }
         if($rootScope.language === 'et'){
             $rootScope.holder = $scope.project[$scope.index].ee;
@@ -382,7 +389,8 @@ projectController.controller('projectController', function projectController($sc
     $scope.menuDown = function () {
         console.log($scope.index);
         $scope.index++;
-        if($scope.index === 7){
+        var length = $scope.project[$scope.index].ee.pictures.length;
+        if($scope.index === length-1){
             $scope.index = 0;
         }
         if($rootScope.language === 'et'){
@@ -394,27 +402,6 @@ projectController.controller('projectController', function projectController($sc
         if($rootScope.language === 'ru'){
             $rootScope.holder = $scope.project[$scope.index].ru;
         }
-        /*if($rootScope.language === 'et'){
-            $rootScope.holder = $scope.project[$rootScope.index].ee;
-        }
-        else if($rootScope.language === 'en'){
-            $rootScope.holder = $scope.project[$rootScope.index].en;
-        }
-        else{
-            $rootScope.holder = $scope.project[$rootScope.index].ru;
-        }
-        $scope.$watch('$rootScope.language', function () {
-            console.log($rootScope.holder);
-            if ($rootScope.language == "et") {
-                $rootScope.holder = $scope.project[index >= $scope.project.length - 1 ? index = 0 : ++index].ee;
-            }
-            else if ($rootScope.language == "en") {
-                $rootScope.holder = $scope.project[index >= $scope.projects.length - 1 ? index = 0 : ++index].en
-            }
-            else {
-                $rootScope.holder = $scope.project[index >= $scope.projects.length - 1 ? index = 0 : ++index].ru
-            }
-        });*/
         $rootScope.projectview = true;
         $scope.globalName = $rootScope.holder.name;
         $scope.globalAlapealkiri = $rootScope.holder.alapealkiri;

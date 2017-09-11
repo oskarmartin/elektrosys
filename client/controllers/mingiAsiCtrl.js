@@ -3,6 +3,7 @@ var mingiAsiCtrl = angular.module('mingiAsiCtrl', ['pascalprecht.translate']);
 
 mingiAsiCtrl.config(function ($translateProvider) {
     $translateProvider.translations('et', {
+        EMAILERROR: 'Kõik väljad peavad olema täidetud',
         LANDINGTITLE1: 'Meie tehtud',
         LANDINGTITLE2: 'on kõrgusi ületavad',
         LANDINGMESSAGE: 'elektrilahendused',
@@ -50,6 +51,7 @@ mingiAsiCtrl.config(function ($translateProvider) {
         ru: 'Россия'
     })
         .translations('en', {
+            EMAILERROR: 'All the fields need to be filled',
             LANDINGTITLE1: 'We take',
             LANDINGTITLE2: 'to new heights',
             LANDINGMESSAGE: 'electrical solutions',
@@ -98,6 +100,7 @@ mingiAsiCtrl.config(function ($translateProvider) {
         })
 
         .translations('ru', {
+            EMAILERROR: 'All the fields need to be filled',
             LANDINGTITLE1: 'Осуществленные нами проекты',
             LANDINGTITLE2: 'превышают высоты',
             LANDINGMESSAGE: 'в сфере електричества',

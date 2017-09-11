@@ -39,7 +39,9 @@ var myApp = angular.module('myApp', [
     'demoCtrl',
     'demoService',
     'tweetbutton',
-    'dataService'
+    'dataService',
+    'mailCtrl',
+    'emailService'
 
 ]);
 
